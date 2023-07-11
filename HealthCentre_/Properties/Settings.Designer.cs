@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthCentre_.Properties {
+namespace HealthCentre.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

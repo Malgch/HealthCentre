@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthCentre_
+namespace HealthCentre
 {
     using System;
     using System.Data.Entity;

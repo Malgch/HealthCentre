@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthCentre_.Properties {
+namespace HealthCentre.Properties {
     using System;
     
     

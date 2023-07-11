@@ -82,6 +82,10 @@
     <Compile Include="diagnozy.cs">
       <DependentUpon>HealthCentre_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Consultation.cs" />
+    <Compile Include="Entities\Diagnosis.cs" />
+    <Compile Include="Entities\Doctor.cs" />
+    <Compile Include="Entities\Patients.cs" />
     <Compile Include="HealthCentre_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
