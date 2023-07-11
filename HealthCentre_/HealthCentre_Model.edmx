@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthCentreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="choroby">
+          <Key>
+            <PropertyRef Name="id_choroby" />
+          </Key>
+          <Property Name="id_choroby" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="nazwa_choroby" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="diagnozy">
+          <Key>
+            <PropertyRef Name="id_diagnozy" />
+          </Key>
+          <Property Name="id_diagnozy" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_choroby" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="id_porady" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lekarze">
+          <Key>
+            <PropertyRef Name="id_lekarza" />
+          </Key>
+          <Property Name="id_lekarza" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pwk" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lekarze_specjalisci">
+          <Key>
+            <PropertyRef Name="id_lekSpecjalista" />
+          </Key>
+          <Property Name="id_lekSpecjalista" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_specjalizacji" Type="bigint" Nullable="false" />
+          <Property Name="id_lekarza" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medykamenty">
+          <Key>
+            <PropertyRef Name="id_medykamentu" />
+          </Key>
+          <Property Name="id_medykamentu" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa_medykamentu" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medykamenty_zalecone">
+          <Key>
+            <PropertyRef Name="id_zalecenia" />
+          </Key>
+          <Property Name="id_zalecenia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_medykamentu" Type="bigint" Nullable="false" />
+          <Property Name="id_diagnozy" Type="bigint" Nullable="false" />
+          <Property Name="dawkowanie" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nazwy_specjalizacji">
+          <Key>
+            <PropertyRef Name="id_specjalizacji" />
+          </Key>
+          <Property Name="id_specjalizacji" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa_specjalizacji" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pacjenci">
+          <Key>
+            <PropertyRef Name="id_pacjenta" />
+          </Key>
+          <Property Name="id_pacjenta" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pesel" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="porady_lekarskie">
+          <Key>
+            <PropertyRef Name="id_porady" />
+          </Key>
+          <Property Name="id_porady" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_lekarzaS" Type="bigint" Nullable="false" />
+          <Property Name="id_pacjenta" Type="bigint" Nullable="false" />
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__diagnozy__id_cho__3D5E1FD2">
+          <End Role="choroby" Type="Self.choroby" Multiplicity="1" />
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="choroby">
+              <PropertyRef Name="id_choroby" />
+            </Principal>
+            <Dependent Role="diagnozy">
+              <PropertyRef Name="id_choroby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnozy__id_por__3E52440B">
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="1" />
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="porady_lekarskie">
+              <PropertyRef Name="id_porady" />
+            </Principal>
+            <Dependent Role="diagnozy">
+              <PropertyRef Name="id_porady" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lekarze_s__id_le__2B3F6F97">
+          <End Role="lekarze" Type="Self.lekarze" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lekarze">
+              <PropertyRef Name="id_lekarza" />
+            </Principal>
+            <Dependent Role="lekarze_specjalisci">
+              <PropertyRef Name="id_lekarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lekarze_s__id_sp__2A4B4B5E">
+          <End Role="nazwy_specjalizacji" Type="Self.nazwy_specjalizacji" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nazwy_specjalizacji">
+              <PropertyRef Name="id_specjalizacji" />
+            </Principal>
+            <Dependent Role="lekarze_specjalisci">
+              <PropertyRef Name="id_specjalizacji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__medykamen__id_di__4222D4EF">
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="1" />
+          <End Role="medykamenty_zalecone" Type="Self.medykamenty_zalecone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diagnozy">
+              <PropertyRef Name="id_diagnozy" />
+            </Principal>
+            <Dependent Role="medykamenty_zalecone">
+              <PropertyRef Name="id_diagnozy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__medykamen__id_me__412EB0B6">
+          <End Role="medykamenty" Type="Self.medykamenty" Multiplicity="1" />
+          <End Role="medykamenty_zalecone" Type="Self.medykamenty_zalecone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medykamenty">
+              <PropertyRef Name="id_medykamentu" />
+            </Principal>
+            <Dependent Role="medykamenty_zalecone">
+              <PropertyRef Name="id_medykamentu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__porady_le__id_le__398D8EEE">
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lekarze_specjalisci">
+              <PropertyRef Name="id_lekSpecjalista" />
+            </Principal>
+            <Dependent Role="porady_lekarskie">
+              <PropertyRef Name="id_lekarzaS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__porady_le__id_pa__3A81B327">
+          <End Role="pacjenci" Type="Self.pacjenci" Multiplicity="1" />
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pacjenci">
+              <PropertyRef Name="id_pacjenta" />
+            </Principal>
+            <Dependent Role="porady_lekarskie">
+              <PropertyRef Name="id_pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthCentreModelStoreContainer">
+          <EntitySet Name="choroby" EntityType="Self.choroby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="diagnozy" EntityType="Self.diagnozy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lekarze" EntityType="Self.lekarze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lekarze_specjalisci" EntityType="Self.lekarze_specjalisci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medykamenty" EntityType="Self.medykamenty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medykamenty_zalecone" EntityType="Self.medykamenty_zalecone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nazwy_specjalizacji" EntityType="Self.nazwy_specjalizacji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pacjenci" EntityType="Self.pacjenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="porady_lekarskie" EntityType="Self.porady_lekarskie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__diagnozy__id_cho__3D5E1FD2" Association="Self.FK__diagnozy__id_cho__3D5E1FD2">
+            <End Role="choroby" EntitySet="choroby" />
+            <End Role="diagnozy" EntitySet="diagnozy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnozy__id_por__3E52440B" Association="Self.FK__diagnozy__id_por__3E52440B">
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+            <End Role="diagnozy" EntitySet="diagnozy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lekarze_s__id_le__2B3F6F97" Association="Self.FK__lekarze_s__id_le__2B3F6F97">
+            <End Role="lekarze" EntitySet="lekarze" />
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lekarze_s__id_sp__2A4B4B5E" Association="Self.FK__lekarze_s__id_sp__2A4B4B5E">
+            <End Role="nazwy_specjalizacji" EntitySet="nazwy_specjalizacji" />
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__medykamen__id_di__4222D4EF" Association="Self.FK__medykamen__id_di__4222D4EF">
+            <End Role="diagnozy" EntitySet="diagnozy" />
+            <End Role="medykamenty_zalecone" EntitySet="medykamenty_zalecone" />
+          </AssociationSet>
+          <AssociationSet Name="FK__medykamen__id_me__412EB0B6" Association="Self.FK__medykamen__id_me__412EB0B6">
+            <End Role="medykamenty" EntitySet="medykamenty" />
+            <End Role="medykamenty_zalecone" EntitySet="medykamenty_zalecone" />
+          </AssociationSet>
+          <AssociationSet Name="FK__porady_le__id_le__398D8EEE" Association="Self.FK__porady_le__id_le__398D8EEE">
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__porady_le__id_pa__3A81B327" Association="Self.FK__porady_le__id_pa__3A81B327">
+            <End Role="pacjenci" EntitySet="pacjenci" />
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthCentreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="choroby">
+          <Key>
+            <PropertyRef Name="id_choroby" />
+          </Key>
+          <Property Name="id_choroby" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa_choroby" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="diagnozy" Relationship="Self.FK__diagnozy__id_cho__3D5E1FD2" FromRole="choroby" ToRole="diagnozy" />
+        </EntityType>
+        <EntityType Name="diagnozy">
+          <Key>
+            <PropertyRef Name="id_diagnozy" />
+          </Key>
+          <Property Name="id_diagnozy" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_choroby" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_porady" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="choroby" Relationship="Self.FK__diagnozy__id_cho__3D5E1FD2" FromRole="diagnozy" ToRole="choroby" />
+          <NavigationProperty Name="porady_lekarskie" Relationship="Self.FK__diagnozy__id_por__3E52440B" FromRole="diagnozy" ToRole="porady_lekarskie" />
+          <NavigationProperty Name="medykamenty_zalecone" Relationship="Self.FK__medykamen__id_di__4222D4EF" FromRole="diagnozy" ToRole="medykamenty_zalecone" />
+        </EntityType>
+        <EntityType Name="lekarze">
+          <Key>
+            <PropertyRef Name="id_lekarza" />
+          </Key>
+          <Property Name="id_lekarza" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwk" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="lekarze_specjalisci" Relationship="Self.FK__lekarze_s__id_le__2B3F6F97" FromRole="lekarze" ToRole="lekarze_specjalisci" />
+        </EntityType>
+        <EntityType Name="lekarze_specjalisci">
+          <Key>
+            <PropertyRef Name="id_lekSpecjalista" />
+          </Key>
+          <Property Name="id_lekSpecjalista" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_specjalizacji" Type="Int64" Nullable="false" />
+          <Property Name="id_lekarza" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="lekarze" Relationship="Self.FK__lekarze_s__id_le__2B3F6F97" FromRole="lekarze_specjalisci" ToRole="lekarze" />
+          <NavigationProperty Name="nazwy_specjalizacji" Relationship="Self.FK__lekarze_s__id_sp__2A4B4B5E" FromRole="lekarze_specjalisci" ToRole="nazwy_specjalizacji" />
+          <NavigationProperty Name="porady_lekarskie" Relationship="Self.FK__porady_le__id_le__398D8EEE" FromRole="lekarze_specjalisci" ToRole="porady_lekarskie" />
+        </EntityType>
+        <EntityType Name="medykamenty">
+          <Key>
+            <PropertyRef Name="id_medykamentu" />
+          </Key>
+          <Property Name="id_medykamentu" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa_medykamentu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="medykamenty_zalecone" Relationship="Self.FK__medykamen__id_me__412EB0B6" FromRole="medykamenty" ToRole="medykamenty_zalecone" />
+        </EntityType>
+        <EntityType Name="medykamenty_zalecone">
+          <Key>
+            <PropertyRef Name="id_zalecenia" />
+          </Key>
+          <Property Name="id_zalecenia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_medykamentu" Type="Int64" Nullable="false" />
+          <Property Name="id_diagnozy" Type="Int64" Nullable="false" />
+          <Property Name="dawkowanie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="diagnozy" Relationship="Self.FK__medykamen__id_di__4222D4EF" FromRole="medykamenty_zalecone" ToRole="diagnozy" />
+          <NavigationProperty Name="medykamenty" Relationship="Self.FK__medykamen__id_me__412EB0B6" FromRole="medykamenty_zalecone" ToRole="medykamenty" />
+        </EntityType>
+        <EntityType Name="nazwy_specjalizacji">
+          <Key>
+            <PropertyRef Name="id_specjalizacji" />
+          </Key>
+          <Property Name="id_specjalizacji" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa_specjalizacji" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="lekarze_specjalisci" Relationship="Self.FK__lekarze_s__id_sp__2A4B4B5E" FromRole="nazwy_specjalizacji" ToRole="lekarze_specjalisci" />
+        </EntityType>
+        <EntityType Name="pacjenci">
+          <Key>
+            <PropertyRef Name="id_pacjenta" />
+          </Key>
+          <Property Name="id_pacjenta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pesel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="porady_lekarskie" Relationship="Self.FK__porady_le__id_pa__3A81B327" FromRole="pacjenci" ToRole="porady_lekarskie" />
+        </EntityType>
+        <EntityType Name="porady_lekarskie">
+          <Key>
+            <PropertyRef Name="id_porady" />
+          </Key>
+          <Property Name="id_porady" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_lekarzaS" Type="Int64" Nullable="false" />
+          <Property Name="id_pacjenta" Type="Int64" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="diagnozy" Relationship="Self.FK__diagnozy__id_por__3E52440B" FromRole="porady_lekarskie" ToRole="diagnozy" />
+          <NavigationProperty Name="lekarze_specjalisci" Relationship="Self.FK__porady_le__id_le__398D8EEE" FromRole="porady_lekarskie" ToRole="lekarze_specjalisci" />
+          <NavigationProperty Name="pacjenci" Relationship="Self.FK__porady_le__id_pa__3A81B327" FromRole="porady_lekarskie" ToRole="pacjenci" />
+        </EntityType>
+        <Association Name="FK__diagnozy__id_cho__3D5E1FD2">
+          <End Role="choroby" Type="Self.choroby" Multiplicity="1" />
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="choroby">
+              <PropertyRef Name="id_choroby" />
+            </Principal>
+            <Dependent Role="diagnozy">
+              <PropertyRef Name="id_choroby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnozy__id_por__3E52440B">
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="1" />
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="porady_lekarskie">
+              <PropertyRef Name="id_porady" />
+            </Principal>
+            <Dependent Role="diagnozy">
+              <PropertyRef Name="id_porady" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__medykamen__id_di__4222D4EF">
+          <End Role="diagnozy" Type="Self.diagnozy" Multiplicity="1" />
+          <End Role="medykamenty_zalecone" Type="Self.medykamenty_zalecone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diagnozy">
+              <PropertyRef Name="id_diagnozy" />
+            </Principal>
+            <Dependent Role="medykamenty_zalecone">
+              <PropertyRef Name="id_diagnozy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lekarze_s__id_le__2B3F6F97">
+          <End Role="lekarze" Type="Self.lekarze" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lekarze">
+              <PropertyRef Name="id_lekarza" />
+            </Principal>
+            <Dependent Role="lekarze_specjalisci">
+              <PropertyRef Name="id_lekarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lekarze_s__id_sp__2A4B4B5E">
+          <End Role="nazwy_specjalizacji" Type="Self.nazwy_specjalizacji" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nazwy_specjalizacji">
+              <PropertyRef Name="id_specjalizacji" />
+            </Principal>
+            <Dependent Role="lekarze_specjalisci">
+              <PropertyRef Name="id_specjalizacji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__porady_le__id_le__398D8EEE">
+          <End Role="lekarze_specjalisci" Type="Self.lekarze_specjalisci" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lekarze_specjalisci">
+              <PropertyRef Name="id_lekSpecjalista" />
+            </Principal>
+            <Dependent Role="porady_lekarskie">
+              <PropertyRef Name="id_lekarzaS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__medykamen__id_me__412EB0B6">
+          <End Role="medykamenty" Type="Self.medykamenty" Multiplicity="1" />
+          <End Role="medykamenty_zalecone" Type="Self.medykamenty_zalecone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medykamenty">
+              <PropertyRef Name="id_medykamentu" />
+            </Principal>
+            <Dependent Role="medykamenty_zalecone">
+              <PropertyRef Name="id_medykamentu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__porady_le__id_pa__3A81B327">
+          <End Role="pacjenci" Type="Self.pacjenci" Multiplicity="1" />
+          <End Role="porady_lekarskie" Type="Self.porady_lekarskie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pacjenci">
+              <PropertyRef Name="id_pacjenta" />
+            </Principal>
+            <Dependent Role="porady_lekarskie">
+              <PropertyRef Name="id_pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthCentre_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="choroby" EntityType="Self.choroby" />
+          <EntitySet Name="diagnozy" EntityType="Self.diagnozy" />
+          <EntitySet Name="lekarze" EntityType="Self.lekarze" />
+          <EntitySet Name="lekarze_specjalisci" EntityType="Self.lekarze_specjalisci" />
+          <EntitySet Name="medykamenty" EntityType="Self.medykamenty" />
+          <EntitySet Name="medykamenty_zalecone" EntityType="Self.medykamenty_zalecone" />
+          <EntitySet Name="nazwy_specjalizacji" EntityType="Self.nazwy_specjalizacji" />
+          <EntitySet Name="pacjenci" EntityType="Self.pacjenci" />
+          <EntitySet Name="porady_lekarskie" EntityType="Self.porady_lekarskie" />
+          <AssociationSet Name="FK__diagnozy__id_cho__3D5E1FD2" Association="Self.FK__diagnozy__id_cho__3D5E1FD2">
+            <End Role="choroby" EntitySet="choroby" />
+            <End Role="diagnozy" EntitySet="diagnozy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnozy__id_por__3E52440B" Association="Self.FK__diagnozy__id_por__3E52440B">
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+            <End Role="diagnozy" EntitySet="diagnozy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__medykamen__id_di__4222D4EF" Association="Self.FK__medykamen__id_di__4222D4EF">
+            <End Role="diagnozy" EntitySet="diagnozy" />
+            <End Role="medykamenty_zalecone" EntitySet="medykamenty_zalecone" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lekarze_s__id_le__2B3F6F97" Association="Self.FK__lekarze_s__id_le__2B3F6F97">
+            <End Role="lekarze" EntitySet="lekarze" />
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lekarze_s__id_sp__2A4B4B5E" Association="Self.FK__lekarze_s__id_sp__2A4B4B5E">
+            <End Role="nazwy_specjalizacji" EntitySet="nazwy_specjalizacji" />
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__porady_le__id_le__398D8EEE" Association="Self.FK__porady_le__id_le__398D8EEE">
+            <End Role="lekarze_specjalisci" EntitySet="lekarze_specjalisci" />
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__medykamen__id_me__412EB0B6" Association="Self.FK__medykamen__id_me__412EB0B6">
+            <End Role="medykamenty" EntitySet="medykamenty" />
+            <End Role="medykamenty_zalecone" EntitySet="medykamenty_zalecone" />
+          </AssociationSet>
+          <AssociationSet Name="FK__porady_le__id_pa__3A81B327" Association="Self.FK__porady_le__id_pa__3A81B327">
+            <End Role="pacjenci" EntitySet="pacjenci" />
+            <End Role="porady_lekarskie" EntitySet="porady_lekarskie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthCentreModelStoreContainer" CdmEntityContainer="HealthCentre_Entities">
+          <EntitySetMapping Name="choroby">
+            <EntityTypeMapping TypeName="HealthCentreModel.choroby">
+              <MappingFragment StoreEntitySet="choroby">
+                <ScalarProperty Name="id_choroby" ColumnName="id_choroby" />
+                <ScalarProperty Name="nazwa_choroby" ColumnName="nazwa_choroby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="diagnozy">
+            <EntityTypeMapping TypeName="HealthCentreModel.diagnozy">
+              <MappingFragment StoreEntitySet="diagnozy">
+                <ScalarProperty Name="id_diagnozy" ColumnName="id_diagnozy" />
+                <ScalarProperty Name="id_choroby" ColumnName="id_choroby" />
+                <ScalarProperty Name="id_porady" ColumnName="id_porady" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lekarze">
+            <EntityTypeMapping TypeName="HealthCentreModel.lekarze">
+              <MappingFragment StoreEntitySet="lekarze">
+                <ScalarProperty Name="id_lekarza" ColumnName="id_lekarza" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="pwk" ColumnName="pwk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lekarze_specjalisci">
+            <EntityTypeMapping TypeName="HealthCentreModel.lekarze_specjalisci">
+              <MappingFragment StoreEntitySet="lekarze_specjalisci">
+                <ScalarProperty Name="id_lekSpecjalista" ColumnName="id_lekSpecjalista" />
+                <ScalarProperty Name="id_specjalizacji" ColumnName="id_specjalizacji" />
+                <ScalarProperty Name="id_lekarza" ColumnName="id_lekarza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medykamenty">
+            <EntityTypeMapping TypeName="HealthCentreModel.medykamenty">
+              <MappingFragment StoreEntitySet="medykamenty">
+                <ScalarProperty Name="id_medykamentu" ColumnName="id_medykamentu" />
+                <ScalarProperty Name="nazwa_medykamentu" ColumnName="nazwa_medykamentu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medykamenty_zalecone">
+            <EntityTypeMapping TypeName="HealthCentreModel.medykamenty_zalecone">
+              <MappingFragment StoreEntitySet="medykamenty_zalecone">
+                <ScalarProperty Name="id_zalecenia" ColumnName="id_zalecenia" />
+                <ScalarProperty Name="id_medykamentu" ColumnName="id_medykamentu" />
+                <ScalarProperty Name="id_diagnozy" ColumnName="id_diagnozy" />
+                <ScalarProperty Name="dawkowanie" ColumnName="dawkowanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nazwy_specjalizacji">
+            <EntityTypeMapping TypeName="HealthCentreModel.nazwy_specjalizacji">
+              <MappingFragment StoreEntitySet="nazwy_specjalizacji">
+                <ScalarProperty Name="id_specjalizacji" ColumnName="id_specjalizacji" />
+                <ScalarProperty Name="nazwa_specjalizacji" ColumnName="nazwa_specjalizacji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pacjenci">
+            <EntityTypeMapping TypeName="HealthCentreModel.pacjenci">
+              <MappingFragment StoreEntitySet="pacjenci">
+                <ScalarProperty Name="id_pacjenta" ColumnName="id_pacjenta" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="pesel" ColumnName="pesel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="porady_lekarskie">
+            <EntityTypeMapping TypeName="HealthCentreModel.porady_lekarskie">
+              <MappingFragment StoreEntitySet="porady_lekarskie">
+                <ScalarProperty Name="id_porady" ColumnName="id_porady" />
+                <ScalarProperty Name="id_lekarzaS" ColumnName="id_lekarzaS" />
+                <ScalarProperty Name="id_pacjenta" ColumnName="id_pacjenta" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
