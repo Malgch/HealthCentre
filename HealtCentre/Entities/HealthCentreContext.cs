@@ -67,6 +67,8 @@ namespace HealtCentre.Entities
                     .HasForeignKey(c => c.DiagnosisId);
             });
 
+
+
         }
         public DateTime RoundToNearest15Minutes(DateTime value)
         {
