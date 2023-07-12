@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthCentre_.Entities;
 using HealthCentre.Entities;
 using System.Windows.Input;
 

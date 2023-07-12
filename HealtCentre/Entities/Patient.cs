@@ -1,4 +1,4 @@
-﻿using HealthCentre_.Entities;
+﻿using HealthCentre.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +16,7 @@ namespace HealthCentre.Entities
         public string Surname { get; set; }
         public string Pesel { get; set; }
 
-        public List<Consultation> Consultations { get; set; }
+        public List<Consultation> Consultations { get; set; } = new List<Consultation>();   
 
     }
 }

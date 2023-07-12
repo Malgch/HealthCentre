@@ -6,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCentre_.Entities
+namespace HealthCentre.Entities
 {
     public class Consultation
     {
         [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string Recommendation { get; set; }
+        public string? Recommendation { get; set; }
 
-        public Diagnosis Diagnosis { get; set; }
+        public Diagnosis? Diagnosis { get; set; }
         public int DiagnosisId { get; set; }
 
         public Doctor Doctor { get; set; }

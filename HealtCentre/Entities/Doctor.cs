@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCentre_.Entities
+namespace HealthCentre.Entities
 {
     public class Doctor
     {
@@ -15,6 +15,6 @@ namespace HealthCentre_.Entities
         public string Surname { get; set; }
         public string Specialization { get; set; }
 
-        public List<Consultation> Consultations { get; set; }
+        public List<Consultation> Consultations { get; set; } = new List<Consultation>();
     }
 }
