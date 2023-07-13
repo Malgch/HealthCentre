@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthCentre.Entities;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace HealtCentre.Entities
 {
@@ -18,7 +19,8 @@ namespace HealtCentre.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=HealthCentreDb;Trusted_Connection=True;");
+            string connectionString = ConfigurationManager.ConnectionStrings["HealthCentreDbConnection"].ConnectionString;
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
