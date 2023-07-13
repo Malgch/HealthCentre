@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HealthCentre
+namespace HealthCentre.ViewComponents
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PatientsDetails.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PatientsDetails : UserControl
     {
-        public MainWindow()
+        public PatientsDetails()
         {
             InitializeComponent();
         }

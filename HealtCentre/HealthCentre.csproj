@@ -18,7 +18,11 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Controls\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
 </Project>

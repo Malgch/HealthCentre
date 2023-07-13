@@ -12,24 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HealthCentre.Views;
 
-namespace HealtCentre;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace HealthCentre.Views
 {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for PatientsView.xaml
+    /// </summary>
+    public partial class PatientsView : UserControl
     {
-        InitializeComponent();
-    }
+        public PatientsView()
+        {
+            InitializeComponent();
+        }
 
-    private void OpenPatientsWindow(object sender, RoutedEventArgs e)
-    {
-        PatientsWindow newWindow = new PatientsWindow();
-        newWindow.Show();
-        Close();
+        private void PatientsDetails_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

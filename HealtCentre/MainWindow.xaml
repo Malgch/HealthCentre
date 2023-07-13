@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Label Content="WELCOME TO HEALTH CENTRE APP" 
+            FontFamily="Arial"
+            FontWeight="DemiBold"
+            FontSize="22"
+            Height="40" 
+            Margin="0,30,0,0" 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Center"
+            Width="400" Foreground="Black">
+            <Label.Background>
+                <ImageBrush/>
+            </Label.Background>
+        </Label>
+
+        <Button Content="Patients" Click="OpenPatientsWindow" Margin="281,109,281,256" />
 
     </Grid>
 </Window>

@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HealthCentre.Pages
+namespace HealthCentre.ViewComponents
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class PatientsList : UserControl
     {
-        public HomePage()
+        public PatientsList()
         {
             InitializeComponent();
-        }
-
-        private void AddPatientButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
