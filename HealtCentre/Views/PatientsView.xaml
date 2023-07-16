@@ -24,7 +24,9 @@
             <Button Grid.Column="1" 
                     Content="Add patient" 
                     VerticalAlignment="Center"
-                    FontSize="16" Click="Button_Click"/>
+                    FontSize="16" 
+                    Click="Button_Click"
+                    Command="{Binding AddPatientsCommand}"/>
             
             <Button Grid.Column="2" 
                     Content="Back" 
@@ -44,12 +46,12 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
-                <viewcomponents:PatientsDetails Margin="10 10 0 10" Grid.Row="0" Loaded="PatientsDetails_Loaded" />
-                <viewcomponents:PatientsHistory Grid.Row="1" Margin="10 0 0 10"/>
+
+                <viewcomponents:PatientsDetails Margin="10 10 0 10" Grid.Row="0" Loaded="PatientsDetails_Loaded" DataContext="{Binding PatientsViewModel}" />
+                <viewcomponents:PatientsHistory Grid.Row="1" Margin="10 0 0 10" DataContext="{Binding PatientsViewModel}"/>
             </Grid>
 
-            <viewcomponents:PatientsList Grid.Column="0" Margin="0 10 0 10"/>
+            <viewcomponents:PatientsList Grid.Column="0" Margin="0 10 0 10" DataContext="{Binding PatientsViewModel}"/>
             
 
         </Grid>

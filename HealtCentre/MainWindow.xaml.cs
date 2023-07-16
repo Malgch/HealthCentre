@@ -24,6 +24,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        
     }
 
     private void OpenPatientsWindow(object sender, RoutedEventArgs e)

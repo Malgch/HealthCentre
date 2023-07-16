@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealtCentre.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -15,6 +16,9 @@ namespace HealtCentre
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            var database = new HealthCentreContext();
+            database.Database.EnsureCreated();
+            
             MainWindow = new MainWindow();
             MainWindow.Show();
             base.OnStartup(e);

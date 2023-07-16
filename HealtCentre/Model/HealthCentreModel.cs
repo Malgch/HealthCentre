@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,30 @@ namespace HealthCentre.Model
     {
         private readonly HealthCentreContext _context;
 
+        public ObservableCollection<Patient> Patients;
+        public ObservableCollection<Doctor> Doctors;
+        public ObservableCollection<Diagnosis> Diagnoses;
+        public ObservableCollection<Consultation> Consultations;
+
         public HealthCentreModel(HealthCentreContext context)
         {
             _context = context;
+            Patients = new ObservableCollection<Patient>(context.Patients);
+            Doctors = new ObservableCollection<Doctor> (context.Doctors);
+            Diagnoses = new ObservableCollection<Diagnosis>(context.Diagnoses);
+            Consultations = new ObservableCollection<Consultation> (context.Consultations);
+
         }
 
         public void AddConsultation(Consultation consultation)
         {
-            _context.Consultations.Add(consultation);
+            Consultations.Add(consultation);
+            _context.SaveChanges();
+        }
+
+        public void AddPatient(Patient patient)
+        {
+            Patients.Add(patient);
             _context.SaveChanges();
         }
 
@@ -29,7 +46,7 @@ namespace HealthCentre.Model
             var consultation = _context.Consultations.Find(consultationId);
             if (consultation != null)
             {
-                _context.Consultations.Remove(consultation);
+                Consultations.Remove(consultation);
                 _context.SaveChanges();
             }
         }
@@ -42,5 +59,6 @@ namespace HealthCentre.Model
                 .Include(c => c.Diagnosis)
                 .ToList();
         }
-    }
+
+        }
 }

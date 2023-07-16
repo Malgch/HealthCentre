@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCentre.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace HealthCentre.Views
     /// </summary>
     public partial class PatientsWindow : Window
     {
+
         public PatientsWindow()
         {
             InitializeComponent();
+            DataContext = new PatientsViewModel();
+
         }
 
 

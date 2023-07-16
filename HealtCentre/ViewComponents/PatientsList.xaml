@@ -10,7 +10,17 @@
         <Border BorderBrush="Gray" 
                 BorderThickness="0" 
                 CornerRadius="50">
-            <ListView/>
         </Border>
+        <ListBox ItemsSource="{Binding Patients}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" Margin="5"/>
+                            <TextBlock Text="{Binding Surname}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        
     </Grid>
 </UserControl>

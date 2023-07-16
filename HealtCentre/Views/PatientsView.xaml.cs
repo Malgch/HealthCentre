@@ -25,6 +25,7 @@ namespace HealthCentre.Views
         public PatientsView()
         {
             InitializeComponent();
+            DataContext = new PatientsView();
         }
 
         private void PatientsDetails_Loaded(object sender, RoutedEventArgs e)
