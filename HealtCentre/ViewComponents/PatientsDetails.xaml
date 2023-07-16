@@ -7,8 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="Gray" BorderThickness="1">
-            <Grid>
+        <Border 
+            Padding="20"
+            BorderBrush="Gray" 
+            BorderThickness="1"
+            CornerRadius="5">
+            <Grid Grid.IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -16,33 +20,33 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Patient details" FontSize="16"/>
+                <TextBlock Grid.Row="0" Text="Patient details" FontSize="16" />
                 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Patient ID" FontWeight="Bold"/>
-                    <TextBlock Grid.Column="1" Text="ExampleID" />
+                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleID" />
                 </Grid>
 
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Patient Name" FontWeight="Bold"/>
-                    <TextBlock Grid.Column="1" Text="ExampleName" />
+                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleName" />
                 </Grid>
 
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Patient Surname" FontWeight="Bold"/>
-                    <TextBlock Grid.Column="1" Text="ExampleSurnameName" />
+                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleSurnameName" />
                 </Grid>
             </Grid>
         </Border>

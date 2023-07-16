@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HealtCentre;
+using HealthCentre;
 
 namespace HealthCentre.Views
 {
@@ -28,6 +30,17 @@ namespace HealthCentre.Views
         private void PatientsDetails_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoToMainMenu(object sender, RoutedEventArgs e)
+        {
+            MainWindow newWindow = new MainWindow();
+            newWindow.Show();
         }
     }
 }

@@ -23,5 +23,7 @@ namespace HealthCentre.Views
         {
             InitializeComponent();
         }
+
+
     }
 }

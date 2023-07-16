@@ -21,7 +21,13 @@
             </Label.Background>
         </Label>
 
-        <Button Content="Patients" Click="OpenPatientsWindow" Margin="281,109,281,256" />
+        <Button     Content="Patients" 
+                    VerticalAlignment="Center"
+                    FontSize="16" Click="OpenPatientsWindow"/>
+        
+        <Button     Content="Doctors" 
+                    VerticalAlignment="Top"
+                    FontSize="16" Click="OpenDoctorsWindow" Margin="0,50,0,0"/>
 
     </Grid>
 </Window>

@@ -32,4 +32,11 @@ public partial class MainWindow : Window
         newWindow.Show();
         Close();
     }
+
+    private void OpenDoctorsWindow(object sender, RoutedEventArgs e)
+    {
+        PatientsWindow newWindow = new PatientsWindow();
+        newWindow.Show();
+        Close();
+    }
 }
