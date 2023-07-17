@@ -14,7 +14,6 @@ namespace HealthCentre.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Pesel { get; set; }
 
         public List<Consultation> Consultations { get; set; } = new List<Consultation>();   
 

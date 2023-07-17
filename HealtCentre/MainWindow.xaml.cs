@@ -36,7 +36,7 @@ public partial class MainWindow : Window
 
     private void OpenDoctorsWindow(object sender, RoutedEventArgs e)
     {
-        PatientsWindow newWindow = new PatientsWindow();
+        DoctorsWindow newWindow = new DoctorsWindow();
         newWindow.Show();
         Close();
     }
