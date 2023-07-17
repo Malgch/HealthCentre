@@ -3,35 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HealthCentre.ViewComponents"
+             xmlns:local="clr-namespace:HealthCentre.ViewComponents" 
+             xmlns:viewmodel="clr-namespace:HealthCentre.ViewModel"  
+             xmlns:views="clr-namespace:HealthCentre.Views" 
+             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"           
+             >
     <Grid>
         <Border BorderBrush="Gray" 
                 BorderThickness="0" 
                 CornerRadius="50">
-            <!--<ListBox ItemsSource="{Binding Patients}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Margin="5"/>
-                            <TextBlock Text="{Binding Surname}" Margin="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>-->
 
             <DockPanel>
-                <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*">
+                <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient, Mode=TwoWay}" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" />
-                        <DataGridTextColumn Header="Name" />
-                        <DataGridTextColumn Header="Surname" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" />
                     </DataGrid.Columns>
+                    
                 </DataGrid>
+                
             </DockPanel>
-        </Border>
-       
-        
+
+            
+        </Border>               
     </Grid>
 </UserControl>

@@ -47,18 +47,18 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <viewcomponents:PatientsDetails Margin="10 10 0 10" Grid.Row="0" Loaded="PatientsDetails_Loaded"  />
-                <viewcomponents:PatientsHistory Grid.Row="1" Margin="10 0 0 10" />
+                <viewcomponents:PatientsDetails Margin="10 10 0 10" Grid.Row="0" />
+                <viewcomponents:PatientsHistory Grid.Row="1" Margin="10 0 0 10"
+                                                />
             </Grid>
 
-            <viewcomponents:PatientsList Grid.Column="0" Margin="0 10 0 10" />
+            <viewcomponents:PatientsList Grid.Column="0" Margin="0 10 0 10" 
+                                         DataContext="{Binding PatientsViewModel, RelativeSource={RelativeSource AncestorType=local:PatientsWindow}}" 
+                                         />
             
 
-        </Grid>
-        
+        </Grid>       
         
     </Grid>
-
-
         
 </UserControl>

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HealthCentre.Views" xmlns:viewcomponents="clr-namespace:HealthCentre.ViewComponents"
+        xmlns:local="clr-namespace:HealthCentre.Views" 
+        xmlns:viewcomponents="clr-namespace:HealthCentre.ViewComponents"
         mc:Ignorable="d"
         Title="PatientsWindow" Height="450" Width="800">
     <Grid Margin="10">

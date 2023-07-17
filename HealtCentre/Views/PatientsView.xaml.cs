@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HealtCentre;
 using HealthCentre;
+using HealthCentre.Entities;
+using HealthCentre.ViewComponents;
 
 namespace HealthCentre.Views
 {
@@ -27,11 +29,6 @@ namespace HealthCentre.Views
             InitializeComponent();
         }
 
-        private void PatientsDetails_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -42,5 +39,7 @@ namespace HealthCentre.Views
             MainWindow newWindow = new MainWindow();
             newWindow.Show();
         }
+
+
     }
 }

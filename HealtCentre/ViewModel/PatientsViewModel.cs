@@ -1,5 +1,6 @@
 ﻿using HealthCentre.Entities;
 using HealthCentre.Model;
+using HealthCentre.ViewComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HealthCentre.ViewModel
@@ -15,12 +17,22 @@ namespace HealthCentre.ViewModel
     {
         private HealthCentreRepository? _repository;
         private List<Patient>? _patients;
+        private Patient _selectedPatient;
 
         public PatientsViewModel(HealthCentreRepository repository)
         {
             _repository = repository;
         }
 
+        public Patient SelectedPatient
+        {
+            get { return _selectedPatient; }
+            set
+            {
+                _selectedPatient = value;
+                OnPropertyChanged(nameof(SelectedPatient));
+            }
+        }
 
         public List<Patient> Patients
         {
@@ -28,7 +40,7 @@ namespace HealthCentre.ViewModel
             set
             {
                 _patients = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Patients));
             }
         }
 

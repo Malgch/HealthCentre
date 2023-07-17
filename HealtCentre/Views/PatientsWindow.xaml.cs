@@ -21,15 +21,16 @@ namespace HealthCentre.Views
     /// </summary>
     public partial class PatientsWindow : Window
     {
+        public PatientsViewModel PatientsViewModel { get; set; }   
 
         public PatientsWindow()
         {
             InitializeComponent();
             using (var repository = new HealthCentreRepository())
             {
-                var patientsViewModel = new PatientsViewModel(repository);
-                DataContext = patientsViewModel;
-                patientsViewModel.LoadPatients();
+                PatientsViewModel = new PatientsViewModel(repository);
+                DataContext = PatientsViewModel;
+                PatientsViewModel.LoadPatients();
             }
         }
     }

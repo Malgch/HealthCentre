@@ -12,6 +12,7 @@
             BorderBrush="Gray" 
             BorderThickness="1"
             CornerRadius="5">
+            
             <Grid Grid.IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -21,14 +22,14 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Patient details" FontSize="16" />
-                
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Patient ID" FontWeight="Bold"/>
-                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleID" />
+                    <TextBlock x:Name="txtPatientIdLabel" Grid.Column="0" Text="Patient ID" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtPatientIdValue" Margin="20 0 0 0" Grid.Column="1" Text="{Binding SelectedPatient.Id}" />
                 </Grid>
 
                 <Grid Grid.Row="2">
@@ -36,8 +37,8 @@
                         <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Patient Name" FontWeight="Bold"/>
-                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleName" />
+                    <TextBlock x:Name="txtPatientNameLabel" Grid.Column="0" Text="Patient Name" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtPatientNameValue" Margin="20 0 0 0" Grid.Column="1" Text="{Binding SelectedPatient.Name}" />
                 </Grid>
 
                 <Grid Grid.Row="3">
@@ -45,9 +46,10 @@
                         <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Patient Surname" FontWeight="Bold"/>
-                    <TextBlock Margin="20 0 0 0" Grid.Column="1" Text="ExampleSurnameName" />
+                    <TextBlock x:Name="txtPatientSurnameLabel" Grid.Column="0" Text="Patient Surname" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtPatientSurnameValue" Margin="20 0 0 0" Grid.Column="1" Text="{Binding SelectedPatient.Surname}" />
                 </Grid>
+                
             </Grid>
         </Border>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCentre.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace HealthCentre.ViewComponents
         public PatientsHistory()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty SelectedPatientProperty = DependencyProperty.Register(
+       "SelectedPatient", typeof(Patient), typeof(PatientsHistory));
+
+        public Patient SelectedPatient
+        {
+            get { return (Patient)GetValue(SelectedPatientProperty); }
+            set { SetValue(SelectedPatientProperty, value); }
         }
     }
 }

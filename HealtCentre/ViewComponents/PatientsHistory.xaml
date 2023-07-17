@@ -7,8 +7,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="DarkGray" BorderThickness="0" CornerRadius="10">
-            <ListView/>
+        <Border 
+            Padding="20"
+            BorderBrush="Gray" 
+            BorderThickness="1"
+            CornerRadius="5">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Patient History" FontSize="16" />
+
+                <ListBox Grid.Row="1" ItemsSource="{Binding SelectedPatient.Consultations}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0 5">
+                                <TextBlock Text="{Binding Date}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Recommendation}"/>
+                                <TextBlock Text="{Binding Diagnosis.Name}"/>
+                                <TextBlock Text="{Binding Doctor.Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

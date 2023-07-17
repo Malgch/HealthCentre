@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthCentre.Entities;
+using HealthCentre.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,25 @@ namespace HealthCentre.ViewComponents
         public PatientsDetails()
         {
             InitializeComponent();
+            Loaded += PatientsDetails_Loaded;
         }
+
+        private void PatientsDetails_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PatientsViewModel viewModel)
+            {
+                DataContext = viewModel;
+            }
+        }
+
+        public static readonly DependencyProperty SelectedPatientProperty = DependencyProperty.Register(
+        "SelectedPatient", typeof(Patient), typeof(PatientsDetails));
+
+        public Patient SelectedPatient
+        {
+            get { return (Patient)GetValue(SelectedPatientProperty); }
+            set { SetValue(SelectedPatientProperty, value); }
+        }
+
     }
 }
