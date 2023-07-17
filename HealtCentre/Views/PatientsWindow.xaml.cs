@@ -1,4 +1,5 @@
-﻿using HealthCentre.ViewModel;
+﻿using HealthCentre.Model;
+using HealthCentre.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,12 @@ namespace HealthCentre.Views
         public PatientsWindow()
         {
             InitializeComponent();
-            DataContext = new PatientsViewModel();
-
+            using (var repository = new HealthCentreRepository())
+            {
+                var patientsViewModel = new PatientsViewModel(repository);
+                DataContext = patientsViewModel;
+                patientsViewModel.LoadPatients();
+            }
         }
-
-
     }
 }

@@ -9,13 +9,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthCentre.Model
 {
-    class HealthCentreRepository
+    public class HealthCentreRepository : IDisposable
     {
         private readonly HealthCentreContext _context;
 
         public HealthCentreRepository()
         {
             _context = new HealthCentreContext();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
 
         #region Consultations

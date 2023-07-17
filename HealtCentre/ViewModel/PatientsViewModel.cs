@@ -13,8 +13,14 @@ namespace HealthCentre.ViewModel
 {
     public class PatientsViewModel : ViewModelBase
     {
-        private readonly HealthCentreRepository? _repository;
+        private HealthCentreRepository? _repository;
         private List<Patient>? _patients;
+
+        public PatientsViewModel(HealthCentreRepository repository)
+        {
+            _repository = repository;
+        }
+
 
         public List<Patient> Patients
         {
@@ -26,12 +32,10 @@ namespace HealthCentre.ViewModel
             }
         }
 
-        //public PatientsViewModel()
-        //{
-        //    PatientsListViewModel = new PatientsListViewModel();
-        //    PatientsDetailsViewModel = new PatientsDetailsViewModel();
-        //    PatientsHistoryViewModel = new PatientsHistoryViewModel();
-        //}
+        public void LoadPatients()
+        {
+            Patients = _repository.GetAllPatients();
+        }
 
 
         //query - do napisania nizej

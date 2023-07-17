@@ -10,8 +10,7 @@
         <Border BorderBrush="Gray" 
                 BorderThickness="0" 
                 CornerRadius="50">
-        </Border>
-        <ListBox ItemsSource="{Binding Patients}">
+            <!--<ListBox ItemsSource="{Binding Patients}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -20,7 +19,19 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
+
+            <DockPanel>
+                <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" />
+                        <DataGridTextColumn Header="Name" />
+                        <DataGridTextColumn Header="Surname" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Border>
+       
         
     </Grid>
 </UserControl>
